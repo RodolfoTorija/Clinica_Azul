@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Clínica Azul</title>
+    <link rel="stylesheet" href="/static/images/icono_clinica.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="shortcut icon" href="#">
+  </head>
+  <body>
+
+
+
+    <!--Header -->
+
+    <nav class="container-fluid justify-content-center navbar navbar-expand-sm bg-dark navbar-dark">
+
+        <div  class="d-flex mx-auto">
+          <a class="navbar-brand" href="/index.html"><img src="/static/images/icono_clinica.png" title="Clínica Azul" class="w-100" height="80px"  alt=""></a>
+        </div>
+
+            <div  class="mx-auto">
+              <ul class="navbar-nav">
+                <li class="nav-item">
+                  <a id="rojo" class="nav-link active" href="/index.html">Inicio</a>
+                </li>
+               <li class="nav-item">
+                  <a id="rojo" class="nav-link active" href="/especialidades.html">Especialidades</a>
+                </li>
+                <li class="nav-item">
+                  <a id="rojo" class="nav-link active" href="/servicios.html">Servicios</a>
+                </li>
+                <li class="nav-item">
+                  <a id="rojo" class="nav-link active" href="/quienessomos.html">Quienes Somos</a>
+                </li>
+                <li class="nav-item active">
+                    <a  id="rojo" class="nav-link active" href="/contactanos.html">Contactanos</a>
+                  </li>
+              </ul>
+            </div>
+
+            <!--Boton inicar sesion-->
+            <div class="mx-auto">
+              <button type="button" class=" btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                Iniciar sesión
+              </button>
+
+              <!--Boton crear nueva cuenta-->
+              <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal2">
+                Crear nueva cuenta
+              </button>
+            </div>
+
+            
+              
+            
+              
+            
+          
+      </nav>
+
+     
+
+
+
+
+
+
+
+      <!--Carrusel-->
+
+      <div id="carouselExampleIndicators" class="carousel slide">
+        <div class="carousel-indicators">
+          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="/static/images/clinica1.png" class="d-block w-100"  alt="...">
+          </div>
+          <div class="carousel-item">
+            <img src="/static/images/clinica2.jpg" class="d-block w-100"  alt="...">
+          </div>
+          <div class="carousel-item">
+            <img src="/static/images/clinica3.jpg" class="d-block w-100"  alt="...">
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+
+
+      <!--FOOTER-->
+
+      <footer class="text-center text-white" style="background-color: #f1f1f1;">
+        <!-- Grid container -->
+        <div class="container pt-4">
+          <!-- Section: Social media -->
+          <section class="mb-4">
+            <!-- Facebook -->
+            <a
+              class="btn btn-link btn-floating btn-lg text-dark m-1"
+              href="#!"
+              role="button"
+              data-mdb-ripple-color="dark"
+              ><i class="fab fa-facebook-f"></i
+            ></a>
+      
+            <!-- Twitter -->
+            <a
+              class="btn btn-link btn-floating btn-lg text-dark m-1"
+              href="#!"
+              role="button"
+              data-mdb-ripple-color="dark"
+              ><i class="fab fa-twitter"></i
+            ></a>
+      
+            <!-- Google -->
+            <a
+              class="btn btn-link btn-floating btn-lg text-dark m-1"
+              href="#!"
+              role="button"
+              data-mdb-ripple-color="dark"
+              ><i class="fab fa-google"></i
+            ></a>
+      
+            <!-- Instagram -->
+            <a
+              class="btn btn-link btn-floating btn-lg text-dark m-1"
+              href="#!"
+              role="button"
+              data-mdb-ripple-color="dark"
+              ><i class="fab fa-instagram"></i
+            ></a>
+      
+            <!-- Linkedin -->
+            <a
+              class="btn btn-link btn-floating btn-lg text-dark m-1"
+              href="#!"
+              role="button"
+              data-mdb-ripple-color="dark"
+              ><i class="fab fa-linkedin"></i
+            ></a>
+            <!-- Github -->
+            <a
+              class="btn btn-link btn-floating btn-lg text-dark m-1"
+              href="#!"
+              role="button"
+              data-mdb-ripple-color="dark"
+              ><i class="fab fa-github"></i
+            ></a>
+          </section>
+          <!-- Section: Social media -->
+        </div>
+        <!-- Grid container -->
+      
+        <!-- Copyright -->
+        <div class="text-center text-dark p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+          © 2023 Copyright
+          <a class="text-dark" href="https://mdbootstrap.com/"></a>
+        </div>
+        <!-- Copyright -->
+      </footer>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
+      
+      <script src="https://kit.fontawesome.com/7437aa589c.js" crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+  </body>
+</html>

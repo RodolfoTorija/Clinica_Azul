@@ -26,31 +26,52 @@
                         <h4 class="mt-1 mb-5 pb-1">Somos Clínica Azul</h4>
                       </div>
       
-                      <form>
+                      <form action="/login" method="POST">
                         <p>Por favor ingresa con tu cuenta</p>
       
                         <div class="form-outline mb-4">
-                          <input type="email" id="form2Example11" class="form-control"
-                            placeholder="Phone number or email address" />
+                          <input type="text" id="form2Example11" class="form-control"
+                            placeholder="Phone number or email address" name="username" />
                           <label class="form-label" for="form2Example11">Usuario</label>
                         </div>
       
                         <div class="form-outline mb-4">
-                          <input type="password" id="form2Example22" class="form-control" />
+                          <input type="password" id="form2Example22" name="password" class="form-control" />
                           <label class="form-label" for="form2Example22">Contraseña</label>
+                        </div>
+
+                        <div id="alert-container">
+                          
+                        
+                          {% if correcto %}
+                          <div class="alert alert-success" role="alert">
+                            {{ correcto }}
+                            </div>
+                            {% endif %}
+
+                            {% if error %}
+                          <div class="alert alert-danger" role="alert">
+                            {{ error }}
+                            </div>
+                            {% endif %}
+                        
                         </div>
       
                         <div class="text-center pt-1 mb-5 pb-1">
-                          <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="button">Iniciar sesión</button>
+                          <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="submit">Iniciar sesión</button>
                           <a class="text-muted" href="#!">Olvidaste tu contraseña?</a>
                         </div>
-      
+
+                        
+
                         <div class="d-flex align-items-center justify-content-center pb-4">
                           <p class="mb-0 me-2">No tienes una cuenta?</p>
-                          <button type="button" class="btn btn-outline-success">Crear cuenta nueva</button>
+                          <button type="submit" class="btn btn-outline-success">Crear cuenta nueva</button>
                         </div>
       
                       </form>
+
+                      
       
                     </div>
                   </div>
