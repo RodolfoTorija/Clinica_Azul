@@ -1,0 +1,52 @@
+#rojo:hover{
+    background-color: blue;
+    border-radius: 7%;
+    
+    
+    
+}
+
+#rojo{
+    margin: 10px;
+    padding: 10px;
+    
+}
+
+.gradient-custom-2 {
+    /* fallback for old browsers */
+    background: #fccb90;
+    
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: -webkit-linear-gradient(to right, #265df3, #d836d5, #8136dd, #4550b4);
+    
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(to right, #4924ee, #3669d8, #3641dd, #3d6ed8);
+    }
+    
+.text-muted{
+    text-decoration: none;
+}
+
+
+.gradient-custom-2 {
+    /* fallback for old browsers */
+    background: #b490fc;
+    
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: -webkit-linear-gradient(to right, #ffffff, #364cd8, #4736dd, #6145b4);
+    
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(to right, #3b0f81, #251661, #050641, #0d0035);
+    }
+    
+    @media (min-width: 768px) {
+    .gradient-form {
+    height: 100vh !important;
+    }
+    }
+    @media (min-width: 769px) {
+    .gradient-custom-2 {
+    border-top-right-radius: .3rem;
+    border-bottom-right-radius: .3rem;
+    }
+    }
