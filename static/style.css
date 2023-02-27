@@ -27,6 +27,10 @@
     text-decoration: none;
 }
 
+.text-white{
+    text-decoration: none;
+    padding: 20px;
+}
 
 .gradient-custom-2 {
     /* fallback for old browsers */
