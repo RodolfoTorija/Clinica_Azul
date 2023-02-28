@@ -32,6 +32,15 @@
     padding: 20px;
 }
 
+.btn-outline-success a{
+    text-decoration: none;
+    color: black;
+}
+
+.img-fluid{
+
+    border-radius: 3%;
+}
 .gradient-custom-2 {
     /* fallback for old browsers */
     background: #b490fc;

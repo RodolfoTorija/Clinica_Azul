@@ -37,6 +37,10 @@ def quienessomos():
 def contactanos():
     return render_template("contactanos.html")
 
+@app.route('/registro.html')
+def registro():
+    return render_template("registro.html")
+
 
 # Configuración de la base de datos
 ...
