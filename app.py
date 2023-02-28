@@ -18,6 +18,9 @@ def home():
 def index():
     return render_template("login.html")
 
+@app.route("/login.html")
+def index_login():
+    return render_template("login.html")
 
 
 @app.route('/especialidades.html')
@@ -74,7 +77,7 @@ def login():
     try:
         mycursor = mydb.cursor()
 
-        mycursor.execute("SELECT * FROM usuarios WHERE nombre = %s AND contrasena = %s", (nombre, contrasena))
+        mycursor.execute("SELECT * FROM usuarios WHERE nombre or email = %s AND contrasena = %s", (nombre, contrasena))
 
         usuario = mycursor.fetchone()
 
@@ -97,12 +100,33 @@ def logout():
     return render_template ('/login.html')
 
 
+#App route para el registro de nuevos usuarios
+@app.route('/registro', methods=['GET', 'POST'])
+def registro_verificacion():
+    if request.method == 'POST':
+        nombre = request.form['name_register']
+        email = request.form['email_register']
+        contrasena = request.form['password_register']
+        
+        # Verificar si el usuario ya existe en la base de datos
+        cur = mydb.cursor()
+        cur.execute("SELECT * FROM usuarios WHERE email = %s OR nombre = %s", (email, nombre))
+        usuario_existente = cur.fetchone()
+        
+        if usuario_existente:
+            mensaje_error = "Ya existe un usuario con ese correo electrónico o nombre de usuario."
+            return render_template('registro.html', error_register=mensaje_error)
+        else:
+            # Insertar los datos en la tabla de la base de datos
+            cur.execute("INSERT INTO usuarios (nombre, email, contrasena) VALUES (%s, %s, %s)", (nombre, email, contrasena))
+            mydb.commit()
+            cur.close()
+            
+            return render_template('registro.html', mensaje_exitoso="Registro existoso inicia sesión")
+    
+    return render_template('registro.html')
 
 
 if __name__ == '__main__':
     app.run()
 
-
-if __name__ == "__main__":
-
-    app.run(port=4000, host="0.0.0.0")

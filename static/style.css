@@ -37,6 +37,11 @@
     color: black;
 }
 
+.btn-success a{
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+}
+
 .img-fluid{
 
     border-radius: 3%;
