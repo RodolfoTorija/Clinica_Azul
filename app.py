@@ -77,7 +77,7 @@ def login():
     try:
         mycursor = mydb.cursor()
 
-        mycursor.execute("SELECT * FROM usuarios WHERE nombre or email = %s AND contrasena = %s", (nombre, contrasena))
+        mycursor.execute("SELECT * FROM usuarios WHERE nombre = %s AND contrasena = %s", (nombre , contrasena))
 
         usuario = mycursor.fetchone()
 
@@ -127,6 +127,8 @@ def registro_verificacion():
     return render_template('registro.html')
 
 
-if __name__ == '__main__':
-    app.run()
 
+
+if __name__ == "__main__":
+
+    app.run(port=4000, host="0.0.0.0")
