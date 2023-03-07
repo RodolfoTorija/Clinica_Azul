@@ -72,18 +72,19 @@ def login():
     
 
     nombre = request.form['username']
+    email = request.form['username']
     contrasena = request.form['password']
 
     try:
         mycursor = mydb.cursor()
 
-        mycursor.execute("SELECT * FROM usuarios WHERE nombre = %s AND contrasena = %s", (nombre , contrasena))
+        mycursor.execute("SELECT * FROM usuarios WHERE nombre = %s or email = %s AND contrasena = %s", (nombre, email , contrasena))
 
         usuario = mycursor.fetchone()
 
         if usuario:
                 session['username'] = nombre # Almacenar el nombre de usuario en la sesión
-                return render_template('/home.html', correcta = 'Has iniciado sesión correctamente')
+                return render_template('/home.html',  correcta = 'Has iniciado sesión correctamente')
         else:
            
             # Nombre de usuario o contraseña incorrectos
