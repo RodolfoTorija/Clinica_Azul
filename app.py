@@ -23,9 +23,9 @@ def index_login():
     return render_template("login.html")
 
 
-@app.route('/especialidades.html')
-def especialidades():
-    return render_template("especialidades.html")
+@app.route('/pacientes.html')
+def pacientes():
+    return render_template("pacientes.html")
 
 @app.route('/servicios.html')
 def servicios():
