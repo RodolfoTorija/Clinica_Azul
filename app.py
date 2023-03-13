@@ -2,6 +2,8 @@ from flask import Flask, render_template, request, redirect, url_for, flash, ses
 import mysql.connector
 from flask_mysqldb import MySQL
 from jinja2 import Template
+from reportlab.pdfgen import canvas
+import database as db
 
 app = Flask(__name__)
 
@@ -22,13 +24,11 @@ def index():
 def index_login():
     return render_template("login.html")
 
-
 @app.route('/pacientes.html')
 def pacientes():
-
-    
     return render_template('pacientes.html')
     
+
 
 @app.route('/servicios.html')
 def servicios():
@@ -137,7 +137,83 @@ def registro_verificacion():
 #CODIGO PARA CRUD ===============================================
 
 
+#Rutas del Registro de Pacientes
+@app.route('/pacientes.html')
+def register_pacientes():
+    cursor = db.database.cursor()
+    cursor.execute("SELECT * FROM pacientes")
+    myresult = cursor.fetchall()
+    #Convertir los datos a diccionario
+    insertObject = []
+    columnNames = [column[0] for column in cursor.description]
+    for record in myresult:
+        insertObject.append(dict(zip(columnNames, record)))
+    cursor.close()
+    return render_template('pacientes.html', data=insertObject)
+    
+@app.route('/user', methods=['POST'])
+def addUser():
+    nombre = request.form['nombre']
+    apellido = request.form['apellido']
+    ciudad = request.form['ciudad']
+    codigo_postal = request.form['codigo_postal']
+    telefono = request.form['telefono']
+    tipo_sangre = request.form['tipo_sangre']
+    
 
+    if nombre and apellido and ciudad and codigo_postal and telefono and tipo_sangre:
+        cursor = db.database.cursor()
+        sql = "INSERT INTO pacientes (nombre, apellido, ciudad, codigo_postal, telefono, tipo_sangre) VALUES (%s, %s, %s, %s, %s, %s)"
+        data = (nombre, apellido, ciudad, codigo_postal, telefono, tipo_sangre)
+        cursor.execute(sql, data)
+        db.database.commit()
+    return redirect(url_for('register_pacientes'))
+
+@app.route('/delete/<string:id>')
+def delete(id):
+    cursor = db.database.cursor()
+    sql = "DELETE FROM users WHERE id=%s"
+    data = (id,)
+    cursor.execute(sql, data)
+    db.database.commit()
+    return redirect(url_for('register_pacientes'))
+
+@app.route('/edit/<string:id>', methods=['POST'])
+def edit(id):
+    nombre = request.form['nombre']
+    apellido = request.form['apellido']
+    ciudad = request.form['ciudad']
+    codigo_postal = request.form['codigo_postal']
+    telefono = request.form['telefono']
+    tipo_sangre = request.form['tipo_sangre']
+
+    if nombre and apellido and ciudad and codigo_postal and telefono and tipo_sangre:
+        cursor = db.database.cursor()
+        sql = "UPDATE users SET nombre = %s, apellido = %s, ciudad = %s, codigo_postal = %s, telefono = %s, tipo_sangre = %s,  WHERE id = %s"
+        data = (nombre, apellido, ciudad, codigo_postal, telefono, tipo_sangre, id)
+        cursor.execute(sql, data)
+        db.database.commit()
+    return redirect(url_for('register_pacientes'))
+
+@app.route('/pdf/<string:id>')
+def generar_pdf(id):
+    cursor = db.database.cursor()
+    sql = "SELECT * FROM pacientes WHERE id=%s"
+    data = (id,)
+    cursor.execute(sql, data)
+    paciente = cursor.fetchone()
+    
+    # Crear el PDF
+    nombre_pdf = f"{paciente[2]}.pdf"
+    c = canvas.Canvas(nombre_pdf)
+    c.drawString(100, 750, f"ID: {paciente[0]}")
+    c.drawString(100, 700, f"Nombre: {paciente[1]}")
+    c.drawString(100, 650, f"Apellido: {paciente[2]}")
+    c.drawString(100, 600, f"Ciudad: {paciente[3]}")
+
+    c.drawString(260, 250, f"Clinica Azul")
+    c.drawImage("static/images/logo.png",220, 300, 150, 150)
+    c.save()
 
 
 
@@ -146,4 +222,4 @@ def registro_verificacion():
 
 if __name__ == "__main__":
 
-    app.run(port=4000, host="0.0.0.0")
+    app.run(debug = True, port=4000, host="0.0.0.0")
