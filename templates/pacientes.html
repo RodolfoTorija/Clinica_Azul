@@ -57,50 +57,7 @@
           
       </nav>
 
-      <table class="table table-striped" method="post">
-        <thead>
-            <tr>
-                
-                <th>Folio del paciente</th>
-                <th>Nombre</th>
-                <th>Apellido</th>
-                <th>Ciudad</th>
-                <th>Código Postal</th>
-                <th>Número de Teléfono</th>
-                <th>Tipo de Sangre</th>
-                <th>PDF</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for paciente in pacientes %}
-            <tr>
-                
-                <td>{{ paciente.folio_paciente }}</td>
-                <td>{{ paciente.nombre }}</td>
-                <td>{{ paciente.apellido }}</td>
-                <td>{{ paciente.ciudad }}</td>
-                <td>{{ paciente.codigo_postal }}</td>
-                <td>{{ paciente.telefono }}</td>
-                <td>{{ paciente.tipo_sangre }}</td>
-                <td>
-                    {% if paciente.pdf %}
-                    <a href="{{ url_for('ver_pdf', folio=paciente.folio) }}" target="_blank">Ver PDF</a>
-                    {% else %}
-                    Sin PDF
-                    {% endif %}
-                </td>
-                <td>
-                    <button class="btn btn-sm btn-primary btn-editar" data-folio="{{ paciente.folio }}" data-nombre="{{ paciente.nombre }}" data-apellido="{{ paciente.apellido }}" data-ciudad="{{ paciente.ciudad }}" data-codigo_postal="{{ paciente.codigo_postal }}" data-telefono="{{ paciente.telefono }}" data-tipo_sangre="{{ paciente.tipo_sangre }}">Editar</button>
-                    <form class="d-inline" action="{{ url_for('eliminar_paciente', folio=paciente.folio) }}" method="POST">
-                        <button type="submit" class="btn btn-sm btn-danger">Eliminar</button>
-                    </form>
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-    
+     
 
 
 

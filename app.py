@@ -26,11 +26,8 @@ def index_login():
 @app.route('/pacientes.html')
 def pacientes():
 
-    cur = mysql.connection.cursor()
-    cur.execute('SELECT * FROM PACIENTES')
-    pacientes = cur.fetchall()
-    cur.close()
-    return render_template('pacientes.html', pacientes=pacientes)
+    
+    return render_template('pacientes.html')
     
 
 @app.route('/servicios.html')
@@ -142,54 +139,6 @@ def registro_verificacion():
 
 
 
-    
-
-@app.route('/agregar_paciente', methods=['POST'])
-def agregar_paciente():
-    nombre = request.form['nombre']
-    apellido = request.form['apellido']
-    ciudad = request.form['ciudad']
-    codigo_postal = request.form['codigo_postal']
-    telefono = request.form['telefono']
-    tipo_sangre = request.form['tipo_sangre']
-    folio_paciente = request.form['folio_paciente']
-    pdf = request.files['pdf'].read() if 'pdf' in request.files else None
-    cur = mysql.connection.cursor()
-    cur.execute('INSERT INTO pacientes (nombre, apellido, ciudad, codigo_postal, telefono, tipo_sangre, folio_paciente, pdf) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)', (nombre, apellido, ciudad, codigo_postal, telefono, tipo_sangre, folio_paciente, pdf))
-    mysql.connection.commit()
-    cur.close()
-    return redirect(url_for('index'))
-
-@app.route('/ver_pdf/<folio>')
-def ver_pdf(folio):
-    cur = mysql.connection.cursor()
-    cur.execute('SELECT pdf FROM pacientes WHERE folio_paciente = %s', (folio,))
-    pdf_data = cur.fetchone()[0]
-    cur.close()
-    return pdf_data
-
-@app.route('/editar_paciente', methods=['POST'])
-def editar_paciente():
-    folio = request.form['folio']
-    nombre = request.form['nombre']
-    apellido = request.form['apellido']
-    ciudad = request.form['ciudad']
-    codigo_postal = request.form['codigo_postal']
-    telefono = request.form['telefono']
-    tipo_sangre = request.form['tipo_sangre']
-    cur = mysql.connection.cursor()
-    cur.execute('UPDATE pacientes SET nombre = %s, apellido = %s, ciudad = %s, codigo_postal = %s, telefono = %s, tipo_sangre = %s WHERE folio_paciente = %s', (nombre, apellido, ciudad, codigo_postal, telefono, tipo_sangre, folio))
-    mysql.connection.commit()
-    cur.close()
-    return redirect(url_for('crud'))
-
-@app.route('/eliminar_paciente/<folio>', methods=['POST'])
-def eliminar_paciente(folio):
-    cur = mysql.connection.cursor()
-    cur.execute('DELETE FROM pacientes WHERE folio_paciente = %s', (folio,))
-    mysql.connection.commit()
-    cur.close()
-    return redirect(url_for('crud'))
 
 
 
