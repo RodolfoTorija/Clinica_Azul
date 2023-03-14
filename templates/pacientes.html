@@ -137,24 +137,24 @@
                              <div class="modal-dialog">
                                <div class="modal-content">
                                  <div class="modal-header">
-                                   <h1 class="modal-title fs-5" id="exampleModalLabel">Paciente #{{d.id}}</h1>
+                                   <h1 class="modal-title fs-6" id="exampleModalLabel">Paciente #{{d.id}}</h1>
                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                  </div>
                                  <div class="modal-body">
                                      <form action="/edit/{{d.id}}" method="post">
                                          <label>Nombre</label>
-                                         <input type="text" class="form-control mb-3" name="username" value="{{d.nombre}}" required pattern="^[a-zA-Z\s]*$" minlength="5" maxlength="40">
+                                         <input type="text" class="form-control mb-3" name="nombre" value="{{d.nombre}}" required pattern="^[a-zA-Z\s]*$" minlength="5" maxlength="40">
                                          <label>Apellido</label>
-                                         <input type="text" class="form-control mb-3" name="name" value="{{d.apellido}}" required minlength="6" maxlength="40" >
-                                         <label>ciudad</label>
-                                         <input type="text" class="form-control mb-3" name="password" value="{{d.ciudad}}" required minlength="6" maxlength="20">
+                                         <input type="text" class="form-control mb-3" name="apellido" value="{{d.apellido}}" required minlength="6" maxlength="40" >
+                                         <label>Ciudad</label>
+                                         <input type="text" class="form-control mb-3" name="ciudad" value="{{d.ciudad}}" required minlength="6" maxlength="20">
                                          <label>Codigo Postal</label>
                                          <input type="text" class="form-control mb-3" name="codigo_postal" value="{{d.codigo_postal}}" required minlength="5" maxlength="7">
-                                         <label>Telefono<label>
+                                         <label>Telefono</label>
                                          <input type="text" class="form-control mb-3" name="telefono" value="{{d.telefono}}" required minlength="10" maxlength="10">
-                                         <label>Tipo de Sangre<label>
-                                          <input type="text" class="form-control mb-3" name="tipo_sangre" value="{{d.tipo_sangre}}" required minlength="5" maxlength="5" pattern="[ABO][+-]">
-                                   
+                                         <label>Tipo de Sangre</label>
+                                         <input type="text" class="form-control mb-2" name="tipo_sangre" value="{{d.tipo_sangre}}" required minlength="2" maxlength="3" pattern="[ABO][+-]">
+                                    
                                  </div>
                                  <div class="modal-footer">
                                    <button type="submit" class="btn btn-primary">Guardar</button>

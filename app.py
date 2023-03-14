@@ -1,9 +1,13 @@
-from flask import Flask, render_template, request, redirect, url_for, flash, session
+from flask import Flask, render_template, request, redirect, url_for, flash, session, send_file
 import mysql.connector
 from flask_mysqldb import MySQL
 from jinja2 import Template
 from reportlab.pdfgen import canvas
 import database as db
+import os
+
+os.environ['LANG'] = 'en_US.UTF-8'
+
 
 app = Flask(__name__)
 
@@ -24,10 +28,7 @@ def index():
 def index_login():
     return render_template("login.html")
 
-@app.route('/pacientes.html')
-def pacientes():
-    return render_template('pacientes.html')
-    
+
 
 
 @app.route('/servicios.html')
@@ -139,7 +140,7 @@ def registro_verificacion():
 
 #Rutas del Registro de Pacientes
 @app.route('/pacientes.html')
-def register_pacientes():
+def pacientes():
     cursor = db.database.cursor()
     cursor.execute("SELECT * FROM pacientes")
     myresult = cursor.fetchall()
@@ -167,16 +168,16 @@ def addUser():
         data = (nombre, apellido, ciudad, codigo_postal, telefono, tipo_sangre)
         cursor.execute(sql, data)
         db.database.commit()
-    return redirect(url_for('register_pacientes'))
+    return redirect(url_for('pacientes'))
 
 @app.route('/delete/<string:id>')
 def delete(id):
     cursor = db.database.cursor()
-    sql = "DELETE FROM users WHERE id=%s"
+    sql = "DELETE FROM pacientes WHERE id=%s"
     data = (id,)
     cursor.execute(sql, data)
     db.database.commit()
-    return redirect(url_for('register_pacientes'))
+    return redirect(url_for('pacientes'))
 
 @app.route('/edit/<string:id>', methods=['POST'])
 def edit(id):
@@ -189,11 +190,11 @@ def edit(id):
 
     if nombre and apellido and ciudad and codigo_postal and telefono and tipo_sangre:
         cursor = db.database.cursor()
-        sql = "UPDATE users SET nombre = %s, apellido = %s, ciudad = %s, codigo_postal = %s, telefono = %s, tipo_sangre = %s,  WHERE id = %s"
+        sql = "UPDATE pacientes SET nombre = %s, apellido = %s, ciudad = %s, codigo_postal = %s, telefono = %s, tipo_sangre = %s WHERE id = %s"
         data = (nombre, apellido, ciudad, codigo_postal, telefono, tipo_sangre, id)
         cursor.execute(sql, data)
         db.database.commit()
-    return redirect(url_for('register_pacientes'))
+    return redirect(url_for('pacientes'))
 
 @app.route('/pdf/<string:id>')
 def generar_pdf(id):
@@ -204,17 +205,21 @@ def generar_pdf(id):
     paciente = cursor.fetchone()
     
     # Crear el PDF
-    nombre_pdf = f"{paciente[2]}.pdf"
+    nombre_pdf = f"{paciente[1]}.pdf"
     c = canvas.Canvas(nombre_pdf)
     c.drawString(100, 750, f"ID: {paciente[0]}")
     c.drawString(100, 700, f"Nombre: {paciente[1]}")
     c.drawString(100, 650, f"Apellido: {paciente[2]}")
     c.drawString(100, 600, f"Ciudad: {paciente[3]}")
+    c.drawString(100, 550, f"Codigo Postal: {paciente[4]}")
+    c.drawString(100, 500, f"Telefono: {paciente[5]}")
+    c.drawString(100, 450, f"Tipo de sangre: {paciente[6]}")
 
-    c.drawString(260, 250, f"Clinica Azul")
-    c.drawImage("static/images/logo.png",220, 300, 150, 150)
+    c.drawString(260, 150, f"Clinica Azul")
+    c.drawImage("static/images/icono_clinica.png",220, 200, 150, 150)
+    c.setTitle(f"Paciente: {paciente[1],paciente[2]}")
     c.save()
-
+    return send_file(nombre_pdf, as_attachment=True)
 
 
 
