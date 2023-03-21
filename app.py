@@ -5,14 +5,25 @@ from jinja2 import Template
 from reportlab.pdfgen import canvas
 import database as db
 import os
+from functools import wraps
 
 os.environ['LANG'] = 'en_US.UTF-8'
+
 
 
 app = Flask(__name__)
 
 app.secret_key = 'fcea920f7412b5da7be0cf42b8c93759'
 
+def login_required(view):
+    @wraps(view)
+    def wrapped_view(**kwargs):
+        if 'username' in session:
+            return view(**kwargs)
+        else:
+            flash('Debes iniciar sesión para acceder a esta página', 'warning')
+            return redirect(url_for('index_login'))
+    return wrapped_view
 
 
 
@@ -85,6 +96,7 @@ def login():
         mycursor.execute("SELECT * FROM usuarios WHERE nombre = %s or email = %s AND contrasena = %s", (nombre, email , contrasena))
 
         usuario = mycursor.fetchone()
+        
 
         if usuario:
                 session['username'] = nombre # Almacenar el nombre de usuario en la sesión
@@ -140,6 +152,7 @@ def registro_verificacion():
 
 #Rutas del Registro de Pacientes
 @app.route('/pacientes.html')
+@login_required
 def pacientes():
     cursor = db.database.cursor()
     cursor.execute("SELECT * FROM pacientes")
