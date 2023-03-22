@@ -173,12 +173,16 @@ def addUser():
     codigo_postal = request.form['codigo_postal']
     telefono = request.form['telefono']
     tipo_sangre = request.form['tipo_sangre']
+    email = request.form['email']
+    edad = request.form['edad']
+    peso = request.form['peso']
+    estatura = request.form['estatura']
     
 
-    if nombre and apellido and ciudad and codigo_postal and telefono and tipo_sangre:
+    if nombre and apellido and ciudad and codigo_postal and telefono and tipo_sangre and email and edad and peso and estatura:
         cursor = db.database.cursor()
-        sql = "INSERT INTO pacientes (nombre, apellido, ciudad, codigo_postal, telefono, tipo_sangre) VALUES (%s, %s, %s, %s, %s, %s)"
-        data = (nombre, apellido, ciudad, codigo_postal, telefono, tipo_sangre)
+        sql = "INSERT INTO pacientes (nombre, apellido, ciudad, codigo_postal, telefono, tipo_sangre, email, edad, peso, estatura) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+        data = (nombre, apellido, ciudad, codigo_postal, telefono, tipo_sangre, email, edad, peso, estatura)
         cursor.execute(sql, data)
         db.database.commit()
     return redirect(url_for('pacientes'))
@@ -200,11 +204,15 @@ def edit(id):
     codigo_postal = request.form['codigo_postal']
     telefono = request.form['telefono']
     tipo_sangre = request.form['tipo_sangre']
+    email = request.form['email']
+    edad = request.form['edad']
+    peso = request.form['peso']
+    estatura = request.form['estatura']
 
-    if nombre and apellido and ciudad and codigo_postal and telefono and tipo_sangre:
+    if nombre and apellido and ciudad and codigo_postal and telefono and tipo_sangre and email and edad and peso and estatura:
         cursor = db.database.cursor()
-        sql = "UPDATE pacientes SET nombre = %s, apellido = %s, ciudad = %s, codigo_postal = %s, telefono = %s, tipo_sangre = %s WHERE id = %s"
-        data = (nombre, apellido, ciudad, codigo_postal, telefono, tipo_sangre, id)
+        sql = "UPDATE pacientes SET nombre = %s, apellido = %s, ciudad = %s, codigo_postal = %s, telefono = %s, tipo_sangre = %s, email = %s, edad = %s, peso = %s, estatura = %s WHERE id = %s"
+        data = (nombre, apellido, ciudad, codigo_postal, telefono, tipo_sangre, email, edad, peso, estatura, id)
         cursor.execute(sql, data)
         db.database.commit()
     return redirect(url_for('pacientes'))
@@ -227,6 +235,10 @@ def generar_pdf(id):
     c.drawString(100, 550, f"Codigo Postal: {paciente[4]}")
     c.drawString(100, 500, f"Telefono: {paciente[5]}")
     c.drawString(100, 450, f"Tipo de sangre: {paciente[6]}")
+    c.drawString(100, 400, f"Email: {paciente[7]}")
+    c.drawString(100, 350, f"Edad: {paciente[8]}")
+    c.drawString(100, 300, f"Peso: {paciente[9]}")
+    c.drawString(100, 250, f"Estatura: {paciente[10]}")
 
     c.drawString(260, 150, f"Clinica Azul")
     c.drawImage("static/images/icono_clinica.png",220, 200, 150, 150)
