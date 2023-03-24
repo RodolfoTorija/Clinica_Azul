@@ -67,7 +67,7 @@
      <h1 class="text-center mt-5 mb-5 text-primary">Registro de Citas</h1>
       
    <Nav class="container mb-5">
-    <form>
+    <form action="/citas" method="POST">
         <!-- 2 column grid layout with text inputs for the first and last names -->
         <div class="row mb-4">
           <div class="col">
@@ -94,19 +94,22 @@
             
                     <select class="form-control" name="departamento_citas" required id="departamento" name="departamento">
                     <option value="">Seleccione una opción</option>
-                    <option value="1">Odontología</option>
-                    <option value="2">Ginecología</option>
-                    <option value="3">Pediatría</option>
-                    <option value="4">Psicología</option>
+                    <option value="Odontología">Odontología</option>
+                    <option value="Ginecología">Ginecología</option>
+                    <option value="Pediatría">Pediatría</option>
+                    <option value="Psicología">Psicología</option>
+                    <option value="General">General</option>
                     </select>
                     <label class="form-label" for="departamento">Departamento</label>
 
 
             </div>
           </div>
+
         </div>
         
-      
+    
+
         <!-- Text input -->
         <div class="form-outline mb-4">
           <input type="text" id="form6Example4" name="email_citas" required class="form-control" />
@@ -115,8 +118,8 @@
       
         <!-- Email input -->
         <div class="form-outline mb-4">
-          <input type="email" id="form6Example5" name="genero_citas" required class="form-control" />
-          <label class="form-label" for="form6Example5">Genero</label>
+          <input type="text" id="form6Example5" name="genero_citas" required class="form-control" />
+          <label class="form-label" for="form6Example5">Género</label>
         </div>
       
         <!-- Number input -->

@@ -248,8 +248,13 @@ def generar_pdf(id):
 
 
 #REGISTRO DE CITAS  ===================================================================
+@app.route('/citas.html')
+def cita():
+    return render_template('citas.html')
 
-@app.route('/citas.html', methods=['POST'])
+
+
+@app.route('/citas', methods=['POST'])
 def citas():
     nombre = request.form['nombre_citas']
     fecha = request.form['fecha_citas']
@@ -267,7 +272,10 @@ def citas():
         cursor.execute(sql, data)
         db.database.commit()
 
-    return redirect(url_for('citas'))
+    
+
+    return redirect(url_for('cita'))
+
 
 
 
