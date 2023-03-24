@@ -247,6 +247,11 @@ def generar_pdf(id):
     return send_file(nombre_pdf, as_attachment=True)
 
 
+#REGISTRO DE CITAS  ===================================================================
+
+@app.route('/citas.html')
+def citas():
+    return render_template("citas.html")
 
 
 
