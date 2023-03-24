@@ -59,7 +59,7 @@
 
      <!--TABLA DE REGISTRO-->
 
-     <h1 class="text-center mt-5 mb-5 text-primary">Registro de Pacientes</h1>
+     <h1 class="text-center mt-5 mb-5 text-info">Registro de Pacientes</h1>
 
      <div class="container mb-5">
          <div class="card shadow">
@@ -107,7 +107,7 @@
               <input type="number" class="form-control mb-3" name="estatura" required minlength="4" maxlength="20" pattern="\d+(\.\d{1,2})?">
           </div>
                          <div class="col">
-                             <button class="btn btn-primary mb-3 mt-4" type="submit">Guardar</button>
+                             <button class="btn btn-success mb-3 mt-4" type="submit">Guardar</button>
                          </div>
                      </div>
  
@@ -117,7 +117,7 @@
                  <!-- Tabla -->
  
                  <table class="table table-bordered">
-                     <thead>
+                     <thead class="bg-info">
                          <tr>
                              <th scope="col">#</th>
                              <th scope="col">Nombre</th>
@@ -151,8 +151,8 @@
                              <td>{{d.peso}}</td>
                              <td>{{d.estatura}}</td>
                              <td><button class="btn btn-primary btn-sm" id="btn-edit{{d.id}}" data-bs-toggle="modal" data-bs-target="#modal{{d.id}}">Editar</button></td>
-                             <td><a href="{{url_for('delete', id=d.id)}}" class="btn btn-danger btn-sm">Borrar</a></td>
-                             <td><a href="{{ url_for('generar_pdf', id=d.id) }}" class="btn btn-info btn-sm">PDF</a></td>
+                             <td><a href="{{url_for('delete', id=d.id)}}" class="btn btn-warning btn-sm">Borrar</a></td>
+                             <td><a href="{{ url_for('generar_pdf', id=d.id) }}" class="btn btn-danger btn-sm">PDF</a></td>
                          </tr>
  
                          <!-- modal -->
@@ -189,7 +189,7 @@
                                     
                                  </div>
                                  <div class="modal-footer">
-                                   <button type="submit" class="btn btn-primary">Guardar</button>
+                                   <button type="submit" class="btn btn-success">Guardar</button>
                                  </div>
                                  </form>
                                </div>
