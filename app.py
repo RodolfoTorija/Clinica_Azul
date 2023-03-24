@@ -249,9 +249,25 @@ def generar_pdf(id):
 
 #REGISTRO DE CITAS  ===================================================================
 
-@app.route('/citas.html')
+@app.route('/citas.html', methods=['POST'])
 def citas():
-    return render_template("citas.html")
+    nombre = request.form['nombre_citas']
+    fecha = request.form['fecha_citas']
+    telefono = request.form['telefono_citas']
+    departamento = request.form['departamento_citas']
+    email = request.form['email_citas']
+    genero = request.form['genero_citas']
+    hora = request.form['hora_citas']
+    sintomas = request.form['sintomas_citas']
+
+    if nombre and fecha and telefono and departamento and email and genero and hora and sintomas:
+        cursor = db.database.cursor()
+        sql = "INSERT INTO citas (nombre_paciente,telefono,fecha, email,genero, sintomas, departamento, hora)  VALUES (%s,%s,%s,%s,%s,%s,%s,%s)"
+        data = (nombre,telefono,fecha, email, genero, sintomas, departamento, hora)
+        cursor.execute(sql, data)
+        db.database.commit()
+
+    return redirect(url_for('citas'))
 
 
 
