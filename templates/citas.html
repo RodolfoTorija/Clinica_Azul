@@ -67,7 +67,7 @@
      <h1 class="text-center mt-5 mb-5 text-primary">Registro de Citas</h1>
       
    <Nav class="container mb-5">
-    <form action="/citas" method="POST">
+    <form action="/citas" action="/enviar_correo" method="POST">
         <!-- 2 column grid layout with text inputs for the first and last names -->
         <div class="row mb-4">
           <div class="col">
@@ -92,7 +92,7 @@
           </div>
           <div class="col">
             
-                    <select class="form-control" name="departamento_citas" required id="departamento" name="departamento">
+                    <select class="form-control" name="departamento_citas" required id="departamento" >
                     <option value="">Seleccione una opción</option>
                     <option value="Odontología">Odontología</option>
                     <option value="Ginecología">Ginecología</option>

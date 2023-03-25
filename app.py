@@ -6,6 +6,12 @@ from reportlab.pdfgen import canvas
 import database as db
 import os
 from functools import wraps
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+import smtplib
+
+#codigo para enviar email y mensaje del registro de citas
+
 
 os.environ['LANG'] = 'en_US.UTF-8'
 
@@ -272,8 +278,23 @@ def citas():
         cursor.execute(sql, data)
         db.database.commit()
 
-    
+    # Construir el mensaje de correo electrónico
+    mensaje = MIMEMultipart()
+    mensaje['From'] = 'llnbllzero@gmail.com'
+    mensaje['To'] = email
+    mensaje['Subject'] = 'Información de cita'
 
+    texto = f'Hola {nombre}, \n\nTu cita está programada para el día {fecha} a las {hora}.\n\nGracias por elegir nuestro servicio de salud.\n\nAtentamente,\nTu proveedor de atención médica Clínica Azul'
+    mensaje.attach(MIMEText(texto))
+
+     # Enviar el mensaje de correo electrónico
+    servidor = smtplib.SMTP('smtp.gmail.com', 587)
+    servidor.starttls()
+    servidor.login('llnbllzero@gmail.com', 'qlovsgnztrhylvrt')
+    servidor.sendmail('llnbllzero@gmail.com', email, mensaje.as_string())
+    servidor.quit()
+
+    
     return redirect(url_for('cita'))
 
 
