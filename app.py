@@ -271,7 +271,9 @@ def cita(id):
 
 
     return render_template('citas.html', nombre=nombre, email=email, telefono=telefono)
-
+@app.route('/cita1')
+def cita1():
+    return redirect(url_for('pacientes'))
 
 
 @app.route('/citas', methods=['POST'])
@@ -309,7 +311,7 @@ def citas():
     servidor.quit()
 
     
-    return redirect(url_for('cita'))
+    return redirect(url_for('cita1'))
 
 
 
