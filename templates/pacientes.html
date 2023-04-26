@@ -138,7 +138,8 @@
                              <th scope="col">Estatura(Cm)</th>
                              <th scope="col">Editar</th>
                              <th scope="col">Borrar</th>
-                             <th scope="col">Generar PDF</th>
+                             <th scope="col">PDF</th>
+                             <th scope="col">Hacer Cita</th>
                          </tr>
                      </thead>
                  
@@ -159,6 +160,7 @@
                              <td><button class="btn btn-primary btn-sm" id="btn-edit{{d.id}}" data-bs-toggle="modal" data-bs-target="#modal{{d.id}}">Editar</button></td>
                              <td><a href="{{url_for('delete', id=d.id)}}" class="btn btn-warning btn-sm">Borrar</a></td>
                              <td><a href="{{ url_for('generar_pdf', id=d.id) }}" class="btn btn-danger btn-sm">PDF</a></td>
+                             <td><a href="{{ url_for('cita', id=d.id) }}" class="btn btn-success btn-sm">Cita</a></td>
                          </tr>
  
                          <!-- modal -->

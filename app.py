@@ -254,9 +254,23 @@ def generar_pdf(id):
 
 
 #REGISTRO DE CITAS  ===================================================================
-@app.route('/citas.html')
-def cita():
-    return render_template('citas.html')
+@app.route('/cita/<int:id>')
+def cita(id):
+
+    cursor = db.database.cursor()
+    sql = ("SELECT nombre, apellido, email, telefono FROM pacientes WHERE id = %s")
+    data = (id,)
+    cursor.execute(sql, data)
+    paciente = cursor.fetchone()
+
+    # Variables de contexto para el formulario de citas
+    nombre = paciente[0] + ' ' + paciente[1]
+    email = paciente[2]
+    telefono = paciente[3]
+
+
+
+    return render_template('citas.html', nombre=nombre, email=email, telefono=telefono)
 
 
 
