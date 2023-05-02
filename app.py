@@ -306,7 +306,7 @@ def citas():
      # Enviar el mensaje de correo electrónico
     servidor = smtplib.SMTP('smtp.gmail.com', 587)
     servidor.starttls()
-    servidor.login('llnbllzero@gmail.com', 'qlovsgnztrhylvrt')
+    servidor.login('llnbllzero@gmail.com', 'tabzfewvhtgbqcqt')
     servidor.sendmail('llnbllzero@gmail.com', email, mensaje.as_string())
     servidor.quit()
 
