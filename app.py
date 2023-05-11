@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, flash, session, send_file
+from flask import Flask, render_template, request, redirect, url_for, flash, session, send_file, jsonify
 import mysql.connector
 from flask_mysqldb import MySQL
 from jinja2 import Template
@@ -93,13 +93,12 @@ def login():
     
 
     nombre = request.form['username']
-    email = request.form['username']
     contrasena = request.form['password']
 
     try:
         mycursor = mydb.cursor()
 
-        mycursor.execute("SELECT * FROM usuarios WHERE nombre = %s or email = %s AND contrasena = %s", (nombre, email , contrasena))
+        mycursor.execute("SELECT * FROM usuarios WHERE nombre = %s AND contrasena = %s", (nombre, contrasena))
 
         usuario = mycursor.fetchone()
         
@@ -121,6 +120,30 @@ def login():
 def logout():
     session.pop('username', None) #Eliminar la variable de sesión username
     return render_template ('/login.html')
+
+#Buscador para pacientes-----------------------------------------
+@app.route('/search', methods=['POST'])
+@login_required
+def search():
+    query = request.form['query']
+
+    cursor = db.database.cursor()
+    sql = "SELECT * FROM pacientes WHERE nombre LIKE %s"
+    data = (f'%{query}%',)
+    cursor.execute(sql, data)
+    patients = cursor.fetchall()
+
+    insertObject = []
+    columnNames = [column[0] for column in cursor.description]
+    for record in patients:
+        insertObject.append(dict(zip(columnNames, record)))
+    cursor.close()
+
+    cursor.close()
+
+    return render_template('pacientes.html', patients=insertObject)
+
+
 
 
 #App route para el registro de nuevos usuarios
