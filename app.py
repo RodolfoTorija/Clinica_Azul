@@ -128,8 +128,8 @@ def search():
     query = request.form['query']
 
     cursor = db.database.cursor()
-    sql = "SELECT * FROM pacientes WHERE nombre LIKE %s"
-    data = (f'%{query}%',)
+    sql = "SELECT * FROM pacientes WHERE nombre LIKE %s OR apellido LIKE %s OR id LIKE %s"
+    data = (f'%{query}%', f'%{query}%', f'%{query}%') 
     cursor.execute(sql, data)
     patients = cursor.fetchall()
 
